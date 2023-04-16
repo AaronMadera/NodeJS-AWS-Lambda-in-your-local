@@ -1,0 +1,34 @@
+{
+  "name": "nodejs-aws-lambda-in-your-local",
+  "version": "1.0.0",
+  "description": "nodejs app that handles both AWS Lambda events and usual requests",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaronMadera/NodeJS-AWS-Lambda-in-your-local.git"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "lambda",
+    "aws",
+    "serverless",
+    "expres-serverless"
+  ],
+  "author": "aaron.madera06@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AaronMadera/NodeJS-AWS-Lambda-in-your-local/issues"
+  },
+  "homepage": "https://github.com/AaronMadera/NodeJS-AWS-Lambda-in-your-local#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}
