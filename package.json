@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/AaronMadera/NodeJS-AWS-Lambda-in-your-local#readme",
   "dependencies": {
+    "@vendia/serverless-express": "^4.10.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.2"
   }
