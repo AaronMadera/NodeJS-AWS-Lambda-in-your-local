@@ -1,0 +1,10 @@
+README.md
+package-lock.json
+Dockerfile
+Makefile
+
+# files starting with .
+.*
+
+# file to run app in Server mode
+index.js
