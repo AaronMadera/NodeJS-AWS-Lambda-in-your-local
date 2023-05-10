@@ -5,11 +5,45 @@ router.get('/', function (req, res) {
     res.send("Hello there!");
 });
 
-router.post('/', function (req, res) {
-    res.status(200).json({
-        payload: req.body,
-        time: + new Date(),
-    })
+router.post("/", async function (req, res) {
+    let reqBody;
+    let reqHeaders;
+    let eventBody;
+    let eventHeaders;
+
+    // TODO: Determine why new version of @vendia/serverless-express or express or node version is making req.body to be Buffer
+    // issue: https://github.com/vendia/serverless-express/issues/347
+    if (req.body instanceof Buffer) {
+        console.log("body is Buffer");
+        reqBody = JSON.parse(req.body.toString());
+    } else {
+        console.log("body is Object");
+        reqBody = req.body;
+    }
+
+    if (req.apiGateway?.event?.body) {
+        if (typeof req.apiGateway.event.body !== "object") {
+            eventBody = JSON.parse(req.apiGateway.event.body);
+        } else {
+            eventBody = req.apiGateway.event.body;
+        }
+    }
+
+    // Comparing headers
+    reqHeaders = req.headers;
+    eventHeaders = req.apiGateway?.event?.headers;
+
+
+    return res.status(200).json({
+        payload: {
+            reqBody,
+            reqHeaders,
+            eventBody,
+            eventHeaders,
+        },
+        name: reqBody?.name ?? eventBody.name ?? "-",
+        time: +new Date(),
+    });
 });
 
 module.exports = router;
