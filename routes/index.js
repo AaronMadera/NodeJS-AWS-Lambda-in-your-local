@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.get("/", function (req, res) {
     res.send("Hello there!");
 });
 
@@ -46,4 +46,23 @@ router.post("/", async function (req, res) {
     });
 });
 
+router.post("/ip", async function (req, res) {
+    let ip = "not found";
+    const lambdaEvent = req.apiGateway?.event;
+    if (req?.socket?.remoteAddress) {
+        ip = req.socket.remoteAddress;
+    } else if (lambdaEvent?.headers) {
+        [ip] = lambdaEvent.headers["X-Forwarded-For"].split(",");
+    }
+    console.log(
+        "req?.socket?.remoteAddress: %s req.ip: %s, req.ips: %s",
+        req?.socket?.remoteAddress,
+        req.ip,
+        req.ips
+    );
+    console.log(lambdaEvent?.headers?.["X-Forwarded-For"]);
+    return res.status(200).json({
+        ip,
+    });
+});
 module.exports = router;
