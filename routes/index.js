@@ -55,10 +55,14 @@ router.post("/ip", async function (req, res) {
         [ip] = lambdaEvent.headers["X-Forwarded-For"].split(",");
     }
     console.log(
-        "req?.socket?.remoteAddress: %s req.ip: %s, req.ips: %s",
+        '==> req?.socket?.remoteAddress: %s req.ip: %s, req.ips: %s',
         req?.socket?.remoteAddress,
         req.ip,
-        req.ips
+        req.ips,
+    );
+    console.log(
+        '==> lambdaEvent.headers["X-Forwarded-For"]: %s',
+        lambdaEvent.headers["X-Forwarded-For"]
     );
     console.log(lambdaEvent?.headers?.["X-Forwarded-For"]);
     return res.status(200).json({
